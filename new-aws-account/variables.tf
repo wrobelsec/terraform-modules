@@ -6,13 +6,13 @@ variable "account_alias" {
 variable "console_group_name" {
   description = "The name of the console group"
   type        = string
-  default     = "console"
+  default     = "${var.account_alias}_console"
 }
 
 variable "admin_group_name" {
   description = "The name of the admin group"
   type        = string
-  default     = "admins"
+  default     = "${var.account_alias}_admin"
 }
 
 variable "minimum_password_length" {
@@ -26,11 +26,11 @@ variable "users" {
   type        = list(any)
   default = [
     {
-      "name" : "Admin",
+      "name" : "${var.account_alias}_admin",
       "groups" : [var.console_group_name, var.admin_group_name]
     },
     {
-      "name" : "CI",
+      "name" : "${var.account_alias}_CI",
       "groups" : [var.admin_group_name]
     }
   ]
